@@ -42,3 +42,5 @@ df_23_22_new.csv
 dados/
 outros/
 .ipynb_checkpoints/
+functions/.ipynb_checkpoints/
+functions/__pycache__/
