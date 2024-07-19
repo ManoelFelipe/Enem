@@ -39,8 +39,13 @@ Thumbs.db
 #####################
 enem.db
 df_23_22_new.csv
+
 dados/
 outros/
 .ipynb_checkpoints/
-functions/.ipynb_checkpoints/*.py
-functions/__pycache__/*.pyc
+
+functions/.ipynb_checkpoints/
+functions/__pycache__/
+
+#unctions/.ipynb_checkpoints/*.py
+#functions/__pycache__/*.pyc
