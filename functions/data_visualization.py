@@ -231,6 +231,7 @@ def inscritos_estado(df):
 
 def quant_insc_muni(df):    
     # cria um vetor para armazenar os 30 municípios com maior número de inscritos
+    # municipios = df['Município_Prova'].value_counts()[:30]
     municipios = df['Município_Prova'].value_counts()[:30]
 
     # gera um gráfico de barras para mapear a quantidade de inscritos por municípios
