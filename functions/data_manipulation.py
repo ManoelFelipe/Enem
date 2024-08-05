@@ -166,7 +166,7 @@ def algoritmo_lasso(df, lista_targets, lista_vars_explicativas):
         lista_erros_teste.append(erro)
 
         # Previsão para o dataset de submissão
-        df_submit_results = df[['INSCRICAO']].copy()
+        df_submit_results = df[['Inscricao']].copy()
         df_submit_results[target] = [trata_predicoes(valor) for valor in clf.predict(X_submit)]
         lista_df_submissao.append(df_submit_results)
 

@@ -31,7 +31,7 @@ def estatistica_descritiva_por_estado(df, metrica):
     "Calcula alguma estatística descritiva para as notas do Enem por estado."
     df_estados = geobr.read_state(year = 2020)
     # provas do dataset de base
-    provas = ['CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO']
+    provas = ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']
     # obtém os resultados por estado conforme medida estatística inserida
     df = df.groupby(by = 'SG_UF', as_index = False)[provas].agg(metrica)
     # geolocalização
@@ -52,9 +52,9 @@ def plot_mapa_estado(df, estatistica_descritiva = np.mean, title = '', cmap = 'B
     # cria o DataFrame conforme estatística descritiva definida
     df = estatistica_descritiva_por_estado(df=df, metrica = estatistica_descritiva)
     # labels para o pllot
-    labels_provas = ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens', 'Matemática', 'Redação']
+    labels_provas = ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']
     # colunas referentes a prova
-    provas = ['CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO']
+    provas = ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']
     # cria a figura
     fig, ax = plt.subplots(1, 5, figsize = (20, 20))
     # itera na lista de provas e cria o mapa
@@ -123,13 +123,12 @@ def box_plot(data, title, xlabel, ylabel, figsize = (12, 5)):
 # o argumento order serve para alterar a ordem dos elementos no eixo x
 def boxplot_por_filtro(df, filtro, order = None):
     'Gera um boxplot com filtro para o eixo x e a variável no eixo y.'
-    # provas = ['MATEMATICA','CIENCIAS_NATUREZA', 'LINGUAGENS', 'HUMANAS','REDACAO']
-    provas = ['Matemática']
+    provas = ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']
+    # provas = ['Matemática']
     filtro_tratado = ' '.join(filtro.split('_')).capitalize()
     # Hide grid lines
     #ax.grid(False)
-    #for prova in provas+['MEDIA']:
-    for prova in provas+['Média_Geral']:
+    for prova in provas+['Media']:
         prova_nome_minusculo = prova.lower()
         fig, ax = plt.subplots(figsize = (15, 5))
         sns.boxplot(x = filtro, y = prova, data = df, ax = ax,
@@ -253,11 +252,11 @@ def quant_insc_muni(df):
     
 def plot_dist_notas(df):
     # Define uma lista das provas que serão analisadas
-    provas = ['MATEMATICA','CIENCIAS_NATUREZA', 'LINGUAGENS', 'HUMANAS','REDACAO']
-    provas_ = provas+['MEDIA']
+    provas = ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']
+    provas_ = provas+['Media']
     index = 0
     xlabels = ['Matemática', 'Ciências da Natureza', 'Linguagens',
-               'Ciências Humanas', 'Redação', 'Média'
+               'Ciências Humanas', 'Redação', 'Media'
               ]
     fig, ax = plt.subplots(2, 3, figsize = (15, 8))
 
@@ -277,17 +276,17 @@ def plot_dist_notas(df):
 def histo_nota_uf(df):
     # Analisando Residencia x Notas
     #Analise_Target = df[['SG_UF_RESIDENCIA', 'Ciências da Natureza', 'Ciências Humanas', 'Linguagens', 'Matemática', 'Redação']]
-    Analise_Target = df[['SG_UF', 'CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO']]
+    Analise_Target = df[['SG_UF','Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']]
 
     # Criando o relátorio
     fig, axs = plt.subplots(3, 2, figsize=(15, 10))
 
     # Plotando as notas em histogramas
-    sns.histplot(data=Analise_Target, x='CIENCIAS_NATUREZA', color='skyblue', bins=100, ax=axs[0, 0])
-    sns.histplot(data=Analise_Target, x='HUMANAS', color='olive', bins=100, ax=axs[0, 1])
-    sns.histplot(data=Analise_Target, x='LINGUAGENS', color='gold', bins=100, ax=axs[1, 0])
-    sns.histplot(data=Analise_Target, x='MATEMATICA', color='teal', bins=100, ax=axs[1, 1])
-    sns.histplot(data=Analise_Target, x='REDACAO', color='olive', bins=50, ax=axs[2, 0])
+    sns.histplot(data=Analise_Target, x='Ciencias_Natureza', color='skyblue', bins=100, ax=axs[0, 0])
+    sns.histplot(data=Analise_Target, x='Humanas', color='olive', bins=100, ax=axs[0, 1])
+    sns.histplot(data=Analise_Target, x='Linguagem', color='gold', bins=100, ax=axs[1, 0])
+    sns.histplot(data=Analise_Target, x='Matemática', color='teal', bins=100, ax=axs[1, 1])
+    sns.histplot(data=Analise_Target, x='Redação', color='olive', bins=50, ax=axs[2, 0])
     axs[2, 1].set_axis_off()
 
     # Incluindo o Titulo na Figura
@@ -295,19 +294,19 @@ def histo_nota_uf(df):
     
 
 
-def map_estado_civil(estado_civil):
+def map_estado_civil(Estado_Civil):
     '''
     mapeia estado civil de acordo com o metadados fornecido
     '''
-    if estado_civil == 0:
+    if Estado_Civil == 0:
         return 'Não informado'
-    elif estado_civil == 1:
+    elif Estado_Civil == 1:
         return 'Solteiro(a)'
-    elif estado_civil == 2:
+    elif Estado_Civil == 2:
         return 'Casado(a)/Mora com companheiro(a)'
-    elif estado_civil == 3:
+    elif Estado_Civil == 3:
         return 'Divorciado(a)/Desquitado(a)/Separado(a)'
-    elif estado_civil == 4:
+    elif Estado_Civil == 4:
         return 'Viúvo(a)'
     else:
         return ''
@@ -321,7 +320,7 @@ def estado_civil(df):
     sns.countplot(data = df,
                  y = 'MAP_ESTADO_CIVIL', ax = ax[0])
     sns.countplot(data = df,
-                 y = 'MAP_ESTADO_CIVIL', hue = 'Gênero', ax = ax[1])
+                 y = 'MAP_ESTADO_CIVIL', hue = 'Genero', ax = ax[1])
     ax[0].set(ylabel = 'Estado Civil', xlabel = 'Quantidade',title = 'Estado civil')
     ax[1].set(ylabel = 'Estado Civil', xlabel = 'Quantidade',title = 'Estado civil por gênero')
     ax[1].legend(title = 'Gênero')
@@ -356,7 +355,7 @@ def renda_nota(df):
 
     plt.figure(figsize=(20, 10))
     plt.title('Renda familiar vs. Nota na prova de matemática do Enem', fontsize=18)
-    plt.plot(df.groupby(df['Renda_mensal_familiar'].map(dict_map_renda))['MATEMATICA'].mean(),
+    plt.plot(df.groupby(df['Renda_mensal_familiar'].map(dict_map_renda))['Matemática'].mean(),
                 color='blue',
                 alpha=0.5)
     plt.show()
@@ -383,15 +382,15 @@ def renda_nota(df):
     }
 
     df_2 = df.dropna(how = 'any', subset = 'Renda_mensal_familiar')
-    df_corr = df_2.query("MATEMATICA == MATEMATICA")
-    corr, _ = pearsonr(df_corr['Renda_mensal_familiar'].map(dict_map_renda), df_corr['MATEMATICA'])
+    df_corr = df_2.query("Matemática == Matemática")
+    corr, _ = pearsonr(df_corr['Renda_mensal_familiar'].map(dict_map_renda), df_corr['Matemática'])
     print ("Correlação:", corr)
 
 
 
 def media_mediana_estado(df):
     # Analisando Residência x Notas na prova do Enem
-    Analise_UF = df[['SG_UF', 'CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO']]
+    Analise_UF = df[['SG_UF', 'Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação']]
 
     # Tamanho da Imagem
     fig, ax = plt.subplots(figsize=(20, 10))
@@ -402,7 +401,8 @@ def media_mediana_estado(df):
     fig.set_facecolor(Cor_Fundo)
 
     # Estilo do gráfico
-    plt.style.use('seaborn-darkgrid')
+    #plt.style.use('seaborn-darkgrid')
+    plt.style.use('ggplot')
 
     # Posição do Plot
     plt.subplot(2, 1, 1)
@@ -418,7 +418,7 @@ def media_mediana_estado(df):
     plt.ylabel('Nota de 0 - 1000', fontsize=14)
 
     # Legenda
-    plt.legend( ['CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO'], 
+    plt.legend( ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação'], 
                ncol=5, fontsize=12, loc='upper center', bbox_to_anchor=(0.5, -0.1), shadow=True )
 
     # Posição do Plot
@@ -435,7 +435,7 @@ def media_mediana_estado(df):
     plt.ylabel('Nota de 0 - 1000', fontsize=14)
 
     # Legenda
-    plt.legend( ['CIENCIAS_NATUREZA', 'HUMANAS', 'LINGUAGENS', 'MATEMATICA', 'REDACAO'], 
+    plt.legend( ['Ciencias_Natureza', 'Humanas', 'Linguagem', 'Matemática', 'Redação'], 
                ncol=5, fontsize=12, loc='upper center', bbox_to_anchor=(0.5, -0.1), shadow=True )
 
     # Ajustando distancias dos gráficos no relatorio
@@ -448,8 +448,8 @@ def media_mediana_estado(df):
                 
 
 def cor_nota(df):
-    brancos = df.query("COR == 1 and MATEMATICA == MATEMATICA")['MATEMATICA']
-    pretos = df.query("COR == 2 and MATEMATICA == MATEMATICA")['MATEMATICA']
+    brancos = df.query("COR == 1 and Matemática == Matemática")['Matemática']
+    pretos = df.query("COR == 2 and Matemática == Matemática")['Matemática']
 
     print (f'Nota média em matemática de inscritos brancos: {round(brancos.mean(), 2)}')
     print (f'Nota média em matemática de inscritos pretos: {round(pretos.mean(), 2)}')
