@@ -203,7 +203,7 @@ def inscritos_estado(df):
     # inscritos por estado com geolocalização
     df_inscritos_por_estado_spatial_data = gpd.GeoDataFrame(pd.merge(
         df_inscritos_por_estado,
-        df_municipio,
+        df_municipio, # df_estados,
         left_on = 'Município_Prova',
         right_on = 'name_muni',
         how = 'inner'
@@ -448,8 +448,8 @@ def media_mediana_estado(df):
                 
 
 def cor_nota(df):
-    brancos = df.query("COR == 1 and Matemática == Matemática")['Matemática']
-    pretos = df.query("COR == 2 and Matemática == Matemática")['Matemática']
+    brancos = df.query("Cor == 1 and Matemática == Matemática")['Matemática']
+    pretos = df.query("Cor == 2 and Matemática == Matemática")['Matemática']
 
     print (f'Nota média em matemática de inscritos brancos: {round(brancos.mean(), 2)}')
     print (f'Nota média em matemática de inscritos pretos: {round(pretos.mean(), 2)}')
