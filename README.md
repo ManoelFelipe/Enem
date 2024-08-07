@@ -5,4 +5,13 @@
 - E praticar conceitos de aprendizado de máquina.
 - Estou utilizando parar terminar a pós graduação em ciência de dados pela Descomplica.
 
+Fonte dos Dados: INEP Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem
+Fazer uma Análise exploratória de dados(EDA), Preparar os dados para a Modelem.  
+
+O trabalho foi realizado usando a ferramenta Jupyter-notebook, utilizando bibliotecas importantes como: 
+sklearn[2], geopandas[3], pandas, geobr etc. 
+Disponibilizado pelo projeto Conda-Forge[1]. 
+[1] https://conda-forge.org/; 
+[2] https://scikit-learn.org/stable/;
+[3] https://geopandas.org/en/stable/ 
 
